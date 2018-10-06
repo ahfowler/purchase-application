@@ -1,7 +1,3 @@
-// Assignment #: Arizona State University CSE205 #6
-//         Name: Azaria Fowler
-//    StudentID: 1214875077
-//      Lecture: TTh 4:35pm-5:45pm
 //  Description: PurchasePane displays a list of available laptops
 //  from which a user can select to buy. It also shows how many
 //  laptops are selected and what is the total amount.
@@ -16,8 +12,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.event.ActionEvent; //**Need to import to handle event
-import javafx.event.EventHandler; //**Need to import to handle event
+import javafx.event.ActionEvent; 
+import javafx.event.EventHandler;
 import javafx.scene.layout.RowConstraints;
 
 import java.util.ArrayList;
@@ -49,28 +45,28 @@ public class PurchasePane extends VBox {
         this.laptopLV = new ListView<Laptop>();
         this.selectedLV = new ListView<Laptop>();
         
-        //Creating section for listed laptops.
+        // Creating section for listed laptops.
         VBox topHalf = new VBox();
         topHalf.setPadding(new Insets(5, 15, 5, 15));
         topHalf.setSpacing(10);
         availableLaptops.setStyle("-fx-font-size: 14;");
         topHalf.getChildren().addAll(availableLaptops, this.laptopLV);
         
-        //Creating section for buttons.
+        // Creating section for buttons.
         HBox control = new HBox();
         control.setAlignment(Pos.CENTER);
         control.setSpacing(5);
         control.setPadding(new Insets(15, 0, 15, 0));
         control.getChildren().addAll(pickLaptop, removeLaptop);
         
-        //Creating section for selected laptops.
+        // Creating section for selected laptops.
         VBox bottomHalf = new VBox();
         bottomHalf.setPadding(new Insets(5, 15, 5, 15));
         bottomHalf.setSpacing(10);
         selectedLaptops.setStyle("-fx-font-size: 14;");
         bottomHalf.getChildren().addAll(selectedLaptops, this.selectedLV);
         
-        //Creating section for quantity and amount.
+        // Creating section for quantity and amount.
         HBox information = new HBox();
         quantitySelected.setStyle("-fx-font-size: 14;");
         totalAmount.setStyle("-fx-font-size: 14;");
@@ -81,7 +77,7 @@ public class PurchasePane extends VBox {
         
         this.getChildren().addAll(topHalf, control, bottomHalf, information);
         
-        //Register the button with its handler class
+        // Register the button with its handler class
         ButtonHandler2 action = new ButtonHandler2();
         pickLaptop.setOnAction(action);
         removeLaptop.setOnAction(action);
@@ -117,20 +113,20 @@ public class PurchasePane extends VBox {
             return answer;
         }
         
-        //Override the abstact method handle()
+        // Override the abstact method handle()
         public void handle(ActionEvent e)
         {
-            //If "Pick a Laptop" button is pressed AND you actually selected something from the top...
+            // If "Pick a Laptop" button is pressed AND you actually selected something from the top...
             if (e.getSource().equals(pickLaptop) && nullException(laptopListings)) {
                 Laptop pickedLaptop1 = laptopListings.getSelectionModel().getSelectedItem();
                 if (!selectedList.contains(pickedLaptop1)) {
                     
-                    //Update quantity
+                    // Update quantity
                     selectedList.add(pickedLaptop1);
                     quantity++;
                     quantitySelected.setText("Quantity Selected: " + quantity);
                     
-                    //Update amount
+                    // Update amount
                     amount += pickedLaptop1.getPrice();
                     totalAmount.setText("Total Amount: $" + amount);
                     
@@ -138,12 +134,12 @@ public class PurchasePane extends VBox {
                 }
             }
             
-            //If "Remove a Laptop" button is pressed AND you actually selected something from the bottom...
+            // If "Remove a Laptop" button is pressed AND you actually selected something from the bottom...
             else if (e.getSource().equals(removeLaptop) && nullException(selectedListings)) {
                 Laptop pickedLaptop2 = selectedListings.getSelectionModel().getSelectedItem();
                 if (selectedList.contains(pickedLaptop2)) {
                     
-                    //Update quantity
+                    // Update quantity
                     selectedList.remove(pickedLaptop2);
                     quantity--;
                     quantitySelected.setText("Quantity Selected: " + quantity);
